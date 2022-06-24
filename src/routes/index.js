@@ -10,7 +10,7 @@ const publicRouter = [
     {path: '/' , component : Home}, 
     {path: '/following' , component : Following}, 
     {path: '/upload' , component : Upload, layout: HeaderOnly}, 
-    {path: '/profile' , component : Profile , layout: HeaderOnly}, 
+    {path: '/@:nickname' , component : Profile , layout: HeaderOnly}, 
     {path: '/search' , component : Search , layout: null}, 
 ]
 

@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tippy from "@tippyjs/react";
-import HTippy from "@tippyjs/react/headless";
 
 import styles from "./Header.module.scss";
 import images from "~/assets/images";
 import {
 	faCircleQuestion,
-	faCircleXmark,
 	faKeyboard,
-	faMessage,
 	faUser,
 } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -18,18 +14,15 @@ import {
 	faEarthAsia,
 	faEllipsisVertical,
 	faGear,
-	faMagnifyingGlass,
 	faSignOut,
-	faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import "tippy.js/dist/tippy.css";
 
 import Button from "~/components/Button";
-import { Wrapper as PopperWrapper } from "~/components/Popper";
-import AccountItem from "~/components/AccountItem";
 import Menu from "~/components/Popper/Menu";
 import { UploadIcon, MessageIcon } from "~/components/Icons";
 import Image from "~/components/Image";
+import Search from "../Search";
 
 const cx = classNames.bind(styles);
 
@@ -91,61 +84,13 @@ const MENU_USER = [
 const currentUser = true;
 
 function Header() {
-	const [searchResult, setSearchResult] = useState([]);
-	useEffect(() => {
-		setInterval(() => {
-			setSearchResult([]);
-		}, 0);
-	}, []);
 	return (
 		<div className={cx("wrapper")}>
 			<div className={cx("inner")}>
 				<div className={cx("logo")}>
 					<img src={images.logo} alt="tiktok" />
 				</div>
-				<HTippy
-					interactive
-					visible={searchResult.length > 0}
-					render={(attrs) => (
-						<div
-							className={cx("search-result")}
-							tabIndex="-1"
-							{...attrs}
-						>
-							<PopperWrapper>
-								<h4 className={cx("search-title")}>
-									Acount Item
-								</h4>
-								<AccountItem></AccountItem>
-								<AccountItem></AccountItem>
-								<AccountItem></AccountItem>
-								<AccountItem></AccountItem>
-							</PopperWrapper>
-						</div>
-					)}
-				>
-					<div className={cx("search")}>
-						<input
-							className={cx("search-input")}
-							placeholder="Search account or video"
-							spellCheck={false}
-						/>
-						<button className={cx("clear")}>
-							<FontAwesomeIcon
-								icon={faCircleXmark}
-							></FontAwesomeIcon>
-						</button>
-						<FontAwesomeIcon
-							className={cx("loading")}
-							icon={faSpinner}
-						></FontAwesomeIcon>
-						<button className={cx("search-btn")}>
-							<FontAwesomeIcon
-								icon={faMagnifyingGlass}
-							></FontAwesomeIcon>
-						</button>
-					</div>
-				</HTippy>
+				<Search></Search>
 
 				<div className={cx("actions")}>
 					{currentUser ? (
